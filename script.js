@@ -4,7 +4,7 @@
     const DEFAULT_THEME = 'light';  // 'dark' یا 'light'
 
     function formatNumber(num) {
-      return new Intl.NumberFormat('fa-IR', { maximumFractionDigits: 4 }).format(num);
+      return new Intl.NumberFormat('fa-IR', { maximumFractionDigits: 0 }).format(num);
     }
 
     // جداکننده هزارگان با کاما (برای ورودی قیمت)
@@ -182,13 +182,33 @@
       });
     }
 // ===================================================================================
+    function enableAutoSelectOnFocus(inputId) {
+        const input = document.getElementById(inputId);
+        if (input) {
+            // استفاده از رویداد focus
+            input.addEventListener('focus', function() {
+                // ایجاد یک تاخیر بسیار کم (0 میلی ثانیه) 
+                // باعث می‌شود انتخاب متن بعد از تمام شدن کلیک مرورگر انجام شود
+                setTimeout(() => {
+                    this.select();
+                }, 0);
+            });
+        }
+    }
+
+// ===================================================================================
     (function init() {
-      setTheme(DEFAULT_THEME);
-      switchTab(DEFAULT_TAB);
-      attachPriceCommaFormatting('sellPrice');
-      enableEnterToCalculate();
-      enableFastZeroShortcut('sellPrice');
-      enableZeroBeforeDecimalForWeight();
-      enableAutoSelectOnFocus('sellProfit');
+        setTheme(DEFAULT_THEME);
+        switchTab(DEFAULT_TAB);
+        attachPriceCommaFormatting('sellPrice');
+        enableEnterToCalculate();
+        enableFastZeroShortcut('sellPrice');
+        enableZeroBeforeDecimalForWeight();
+
+        enableAutoSelectOnFocus('sellWeight');
+        enableAutoSelectOnFocus('buyWeight');
+        enableAutoSelectOnFocus('sellFee');
+        enableAutoSelectOnFocus('sellProfit');
+        enableAutoSelectOnFocus('sellPrice');
     })();
   
