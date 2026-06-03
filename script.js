@@ -7,6 +7,10 @@
       return new Intl.NumberFormat('fa-IR', { maximumFractionDigits: 0 }).format(num);
     }
 
+    function formatKarat(num) {
+      return new Intl.NumberFormat('fa-IR', { maximumFractionDigits: 4 }).format(num);
+    }
+
     // جداکننده هزارگان با کاما (برای ورودی قیمت)
     function addCommasToNumberString(str) {
       // فقط رقم‌ها را نگه دار
@@ -61,23 +65,30 @@
       const next = (current === 'dark') ? 'light' : 'dark';
       setTheme(next);
     }
-
+    
+    // ===================================================================================
     function calculateBuy() {
-      const basePrice = parseFloat(document.getElementById("buyBasePrice").value);
-      const weight = parseFloat(document.getElementById("buyWeight").value);
-      const karat = parseFloat(document.getElementById("buyKarat").value);
+        const goldPrice = parseCommaNumber(document.getElementById("buyBasePrice").value);
+        const weight = parseFloat(document.getElementById("buyWeight").value);
+        const karat = parseFloat(document.getElementById("buyKarat").value);
 
-      if (isNaN(basePrice) || isNaN(weight) || isNaN(karat)) {
-        alert("لطفاً همه فیلدهای بخش خرید را به‌درستی پر کنید.");
-        return;
-      }
+        if (isNaN(goldPrice) || isNaN(weight) || isNaN(karat)) {
+            alert("لطفاً همه فیلدها را به درستی وارد کنید");
+            return;
+        }
 
-      const final = weight * basePrice * (karat / 24);
+        // فرمول جدید خرید
+        const finalPrice = ((weight * karat) / 750) * goldPrice;
+        const newKarat = (weight * karat) / 750;
 
-      document.getElementById("buyFinalPrice").innerText = formatNumber(final) + " تومان";
-      document.getElementById("buyResultBox").style.display = "block";
+        document.getElementById("finalBuyKarat").innerText = formatKarat(newKarat);
+        document.getElementById("newBuyKaratWeightBox").style.display = "block";
+
+        document.getElementById("buyFinalPrice").innerText = formatNumber(finalPrice) + "تومان";
+        document.getElementById("buyResultBox").style.display = "block";
+
     }
-
+    // ===================================================================================
     function calculateSell() {
       // قیمت را با حذف کاما می‌خوانیم
       const price = parseCommaNumber(document.getElementById("sellPrice").value);
@@ -200,9 +211,15 @@
     (function init() {
         setTheme(DEFAULT_THEME);
         switchTab(DEFAULT_TAB);
+
         attachPriceCommaFormatting('sellPrice');
+        attachPriceCommaFormatting('buyBasePrice');
+
         enableEnterToCalculate();
+
         enableFastZeroShortcut('sellPrice');
+        enableFastZeroShortcut('buyBasePrice');
+
         enableZeroBeforeDecimalForWeight();
 
         enableAutoSelectOnFocus('sellWeight');
