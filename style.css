@@ -234,3 +234,25 @@
         color: #a0a0a0; 
         opacity: 1; 
     }
+
+.karat-options {
+    display: flex; /* فعال کردن چیدمان انعطاف‌پذیر */
+    width: 100%;   /* عرض باکس برابر با عرض اینپوت (والد) می‌شود */
+    gap: 8px;      /* فاصله خیلی کم بین دکمه‌ها برای زیبایی */
+    margin-top: 5px;
+}
+
+.karat-options button {
+    flex: 1;       /* این دستور جادویی است: هر دکمه ۱ سهم از فضا را می‌گیرد */
+    padding: 10px 0;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.karat-options button:hover {
+    background-color: #ffc14d66;
+}

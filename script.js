@@ -206,7 +206,13 @@
             });
         }
     }
-
+// ===================================================================================
+    function setKarat(value) {
+        // مقدار را در اینپوت عیار قرار می‌دهد
+        document.getElementById("buyKarat").value = value;
+        // اختیاری: اگر می‌خواهی بلافاصله بعد از کلیک محاسبه هم انجام شود:
+        calculateBuy(); 
+}
 // ===================================================================================
     (function init() {
         setTheme(DEFAULT_THEME);
@@ -227,5 +233,9 @@
         enableAutoSelectOnFocus('sellFee');
         enableAutoSelectOnFocus('sellProfit');
         enableAutoSelectOnFocus('sellPrice');
+        
+        enableAutoSelectOnFocus('buyBasePrice');
+        enableAutoSelectOnFocus('buyWeight');
+        enableAutoSelectOnFocus('buyKarat');
     })();
   

@@ -46,10 +46,18 @@
         <input type="number" id="buyKarat" placeholder="مثلاً 745" step="1" />
       </div>
 
+      <!-- در تب خرید، زیر اینپوت عیار -->
+      <div class="karat-options">
+        <button type="button" class="btn-sm" onclick="setKarat(740)">740</button>
+        <button type="button" class="btn-sm" onclick="setKarat(745)">745</button>
+        <button type="button" class="btn-sm" onclick="setKarat(750)">750</button>
+      </div>
+
+
       <button class="btn" onclick="calculateBuy()">محاسبه خرید</button>
 
       <div class="result" id="newBuyKaratWeightBox">
-        <h3>وزن طلا بر حسب طلای ۷۵۰</h3>
+        <h3>وزن بر حسب طلای ۷۵۰</h3>
         <div class="price" id="finalBuyKarat">عیار 0</div>
       </div>
 
